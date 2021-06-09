@@ -13,17 +13,19 @@
 NAME	= a.out
 
 CC		= clang++
-FLAGS	= -Wall -Wextra -Werror
+FLAGS	= -Wall -Wextra -Werror -std=c++98
 
 
 SRCS	= main.cpp Bureaucrat.cpp Form.cpp
 OBJS	= $(SRCS:.cpp=.o)
 
+.cpp.o:
+	$(CC) $(fLAGS) -c $<
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(fLAGS) -std=c++98 $(OBJS) -o $@
+	$(CC) $(fLAGS) $(OBJS) -o $@
 
 clean:
 	rm -f $(OBJS)
@@ -33,3 +35,5 @@ fclean: clean
 
 re: fclean
 	$(MAKE)
+
+.PHONY : clean fclean re all
